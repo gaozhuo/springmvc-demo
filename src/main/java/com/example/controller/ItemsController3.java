@@ -3,6 +3,9 @@ package com.example.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.pojo.User;
+import com.example.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,12 +24,17 @@ import com.example.po.Items;
 //使用Controller标识 它是一个控制器
 @Controller
 public class ItemsController3 {
+    @Autowired
+    private UserService userService;
 
     //商品查询列表
     //@RequestMapping实现 对queryItems方法和url进行映射，一个方法对应一个url
     //一般建议将url和方法写成一样
     @RequestMapping("/queryItems3")
     public ModelAndView queryItems() throws Exception {
+
+        User user = userService.findUserById(1);
+        System.out.println(user);
 
         //调用service查找 数据库，查询商品列表，这里使用静态数据模拟
         List<Items> itemsList = new ArrayList<Items>();
